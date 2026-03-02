@@ -8,7 +8,6 @@ import {
   FileText, Smartphone, X, User
 } from 'lucide-react';
 
-import { AIChat } from './components/AIChat';
 import { Project, SkillGroup, Publication, Certification, Achievement } from './types';
 
 // --- DATA CONSTANTS ---
@@ -47,7 +46,8 @@ const PROJECTS: Project[] = [
     ],
     tech: ["Python", "CVE API", "Automation", "Security"],
     color: "from-red-500 to-orange-500",
-    icon: <Shield className="w-8 h-8" />
+    icon: <Shield className="w-8 h-8" />,
+    github: "https://github.com/padalingam4648-atman/Malcure"
   },
   {
     title: "FARMER APP",
@@ -64,7 +64,7 @@ const PROJECTS: Project[] = [
     tech: ["Flutter", "Firebase", "Dart", "UI/UX"],
     color: "from-green-400 to-emerald-600",
     icon: <Smartphone className="w-8 h-8" />,
-    github: "https://github.com/padalingam4648-atman/Farmer-app"
+    github: "https://github.com/padalingam4648-atman/Farmer-connect"
   },
   {
     title: "SECURE CLOUD",
@@ -80,7 +80,42 @@ const PROJECTS: Project[] = [
     ],
     tech: ["Cryptography", "Cloud", "Research", "Algorithms"],
     color: "from-blue-400 to-cyber-secondary",
-    icon: <Lock className="w-8 h-8" />
+    icon: <Lock className="w-8 h-8" />,
+    github: "https://github.com/padalingam4648-atman/Securing-Data-Encryption-Using-the-Homomorphic-Encryption"
+  },
+  {
+    title: "MOBI-LOCATOR",
+    category: "Android Security",
+    description: [
+      "Remote Device Security & Tracking Platform."
+    ],
+    features: [
+      "SMS-triggered alarm & location tracking",
+      "Remote device lock via SMS",
+      "SIM card change monitoring",
+      "Offline operation - no internet needed"
+    ],
+    tech: ["Android", "Kotlin", "SMS", "GPS"],
+    color: "from-purple-500 to-pink-500",
+    icon: <Smartphone className="w-8 h-8" />,
+    github: "https://github.com/padalingam4648-atman/Mobi-Locator"
+  },
+  {
+    title: "LUDO GAME",
+    category: "Mobile Game",
+    description: [
+      "Classic Ludo Board Game - Mankatha Edition."
+    ],
+    features: [
+      "Multiplayer gameplay",
+      "Traditional Ludo rules",
+      "Smooth animations",
+      "Built with Flutter framework"
+    ],
+    tech: ["Flutter", "Dart", "Game Dev", "UI/UX"],
+    color: "from-yellow-400 to-orange-500",
+    icon: <Layout className="w-8 h-8" />,
+    github: "https://github.com/padalingam4648-atman/Ludo---Mankatha"
   }
 ];
 
@@ -174,7 +209,7 @@ const ResumeModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             <div className="text-center border-b-2 border-gray-900 pb-6">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase tracking-wider mb-3">Padalingam S</h1>
                 <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm font-medium text-gray-600">
-                    <span className="flex items-center gap-1"><Mail className="w-3 h-3"/> padalingam7788@gmail.com</span>
+                    <span className="flex items-center gap-1"><Mail className="w-3 h-3"/> padalingam4648@gmail.com</span>
                     <span className="hidden md:inline">|</span>
                     <span className="flex items-center gap-1"><MapPin className="w-3 h-3"/> Coimbatore, Tamilnadu</span>
                     <span className="hidden md:inline">|</span>
@@ -418,7 +453,7 @@ const Hero = ({ onOpenResume }: { onOpenResume: () => void }) => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-cyber-muted text-lg md:text-xl max-w-3xl mx-auto mb-10 font-light leading-relaxed"
         >
-          I am <strong className="text-white">Padalingam S</strong>. An aspiring Cyber Security Engineer specializing in Prompt Engineering, Cloud Infrastructure, Digital Products, Automation, and Cyber Security.
+          I am <strong className="text-white">Padalingam S</strong>. An aspiring Cyber Security Engineer specializing in Prompt Engineering, Automation Tools, Digital Products, Python Scripting, and Cyber Security.
         </motion.p>
 
         <motion.div 
@@ -483,7 +518,7 @@ const About = () => (
             </p>
             
             <div className="flex flex-wrap gap-3 mt-6">
-              {['Prompt Engineering', 'Cyber Security', 'Cloud Infra', 'Automation', 'UI/UX'].map((tag) => (
+              {['Prompt Engineering', 'Cyber Security', 'Automation Tools', 'Python Scripts', 'UI/UX'].map((tag) => (
                 <span key={tag} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-cyber-primary">
                   {tag}
                 </span>
@@ -516,12 +551,12 @@ const About = () => (
             <p className="text-xs text-gray-500 mt-1">UI/UX & Branding</p>
           </motion.div>
 
-          <motion.div variants={scaleIn} className="glass-panel p-6 rounded-2xl text-center hover:border-pink-500/50 transition-colors">
-            <div className="w-12 h-12 mx-auto bg-pink-500/20 rounded-full flex items-center justify-center mb-4 text-pink-500">
-              <Cloud className="w-6 h-6" />
+          <motion.div variants={scaleIn} className="glass-panel p-6 rounded-2xl text-center hover:border-purple-500/50 transition-colors">
+            <div className="w-12 h-12 mx-auto bg-purple-500/20 rounded-full flex items-center justify-center mb-4 text-purple-500">
+              <Terminal className="w-6 h-6" />
             </div>
-            <h4 className="font-bold text-white">Cloud</h4>
-            <p className="text-xs text-gray-500 mt-1">Infrastructure Security</p>
+            <h4 className="font-bold text-white">Automation</h4>
+            <p className="text-xs text-gray-500 mt-1">Python Scripts & Tools</p>
           </motion.div>
         </motion.div>
       </div>
@@ -567,81 +602,177 @@ const Skills = () => (
   </section>
 );
 
-const Projects = () => (
-  <section id="projects" className="py-32 relative">
-    {/* Decorative Background */}
-    <div className="absolute top-1/2 left-0 w-full h-[500px] bg-gradient-to-r from-cyber-secondary/5 via-cyber-primary/5 to-cyber-secondary/5 -skew-y-6 pointer-events-none" />
-    
-    <div className="max-w-7xl mx-auto px-6 relative z-10">
-      <SectionTitle subtitle="Innovation">FEATURED PROJECTS</SectionTitle>
-      
-      <div className="grid lg:grid-cols-3 gap-8">
-        {PROJECTS.map((project, idx) => (
-          <motion.div
-            key={idx}
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            whileHover={{ y: -10 }}
-            className="glass-card rounded-2xl overflow-hidden group flex flex-col h-full border border-white/10 hover:border-cyber-primary/50 transition-all duration-300 shadow-lg hover:shadow-cyber-primary/20"
-          >
-            {/* Card Header */}
-            <div className={`h-2 bg-gradient-to-r ${project.color}`} />
-            
-            <div className="p-8 flex-1 flex flex-col">
-              <div className="flex justify-between items-start mb-6">
-                <div className="p-3 bg-white/5 rounded-lg text-white group-hover:text-cyber-primary transition-colors border border-white/10">
-                  {project.icon}
-                </div>
-                <span className="text-xs font-mono text-gray-500 uppercase tracking-widest border border-white/10 px-2 py-1 rounded">
-                  {project.category}
-                </span>
-              </div>
-              
-              <h3 className="text-2xl font-display font-bold text-white mb-3 tracking-tight">{project.title}</h3>
-              
-              <div className="mb-6 space-y-2">
-                {project.description.map((desc, i) => (
-                  <p key={i} className="text-gray-400 text-sm leading-relaxed">{desc}</p>
-                ))}
-              </div>
+const Projects = () => {
+  const mainProjects = PROJECTS.slice(0, 3);
+  const miniProjects = PROJECTS.slice(3);
 
-              <div className="space-y-2 mb-8 flex-1">
-                {project.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-2 text-sm text-gray-500">
-                    <CheckCircle2 className="w-4 h-4 text-cyber-primary shrink-0 mt-0.5" />
-                    <span>{feature}</span>
+  return (
+    <section id="projects" className="py-32 relative">
+      {/* Decorative Background */}
+      <div className="absolute top-1/2 left-0 w-full h-[500px] bg-gradient-to-r from-cyber-secondary/5 via-cyber-primary/5 to-cyber-secondary/5 -skew-y-6 pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <SectionTitle subtitle="Innovation">FEATURED PROJECTS</SectionTitle>
+        
+        {/* Main Projects */}
+        <div className="mb-20">
+          <motion.h3 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-3xl font-display font-bold text-white mb-8 flex items-center gap-3"
+          >
+            <div className="w-2 h-8 bg-gradient-to-b from-cyber-primary to-cyber-secondary rounded-full" />
+            Major Projects
+          </motion.h3>
+          <div className="grid lg:grid-cols-3 gap-8">
+            {mainProjects.map((project, idx) => (
+              <motion.div
+                key={idx}
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                className="glass-card rounded-2xl overflow-hidden group flex flex-col h-full border border-white/10 hover:border-cyber-primary/50 transition-all duration-300 shadow-lg hover:shadow-cyber-primary/20"
+              >
+                {/* Card Header */}
+                <div className={`h-2 bg-gradient-to-r ${project.color}`} />
+                
+                <div className="p-8 flex-1 flex flex-col">
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="p-3 bg-white/5 rounded-lg text-white group-hover:text-cyber-primary transition-colors border border-white/10">
+                      {project.icon}
+                    </div>
+                    <span className="text-xs font-mono text-gray-500 uppercase tracking-widest border border-white/10 px-2 py-1 rounded">
+                      {project.category}
+                    </span>
                   </div>
-                ))}
-              </div>
-              
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((t, i) => (
-                  <span key={i} className="text-xs font-bold text-gray-400 bg-black/50 px-3 py-1.5 rounded-md border border-white/5">
-                    {t}
-                  </span>
-                ))}
-              </div>
-              
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-cyber-primary hover:text-black text-white rounded-lg border border-white/20 hover:border-cyber-primary transition-all font-mono text-sm font-bold w-full justify-center"
+                  
+                  <h3 className="text-2xl font-display font-bold text-white mb-3 tracking-tight">{project.title}</h3>
+                  
+                  <div className="mb-6 space-y-2">
+                    {project.description.map((desc, i) => (
+                      <p key={i} className="text-gray-400 text-sm leading-relaxed">{desc}</p>
+                    ))}
+                  </div>
+
+                  <div className="space-y-2 mb-8 flex-1">
+                    {project.features.map((feature, i) => (
+                      <div key={i} className="flex items-start gap-2 text-sm text-gray-500">
+                        <CheckCircle2 className="w-4 h-4 text-cyber-primary shrink-0 mt-0.5" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tech.map((t, i) => (
+                      <span key={i} className="text-xs font-bold text-gray-400 bg-black/50 px-3 py-1.5 rounded-md border border-white/5">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-cyber-primary hover:text-black text-white rounded-lg border border-white/20 hover:border-cyber-primary transition-all font-mono text-sm font-bold w-full justify-center"
+                    >
+                      <Github className="w-4 h-4" />
+                      View on GitHub
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mini Projects */}
+        {miniProjects.length > 0 && (
+          <div>
+            <motion.h3 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-2xl md:text-3xl font-display font-bold text-white mb-8 flex items-center gap-3"
+            >
+              <div className="w-2 h-8 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full" />
+              Mini Projects
+            </motion.h3>
+            <div className="grid lg:grid-cols-3 gap-8">
+              {miniProjects.map((project, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={fadeInUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  whileHover={{ y: -10 }}
+                  className="glass-card rounded-2xl overflow-hidden group flex flex-col h-full border border-white/10 hover:border-cyber-primary/50 transition-all duration-300 shadow-lg hover:shadow-cyber-primary/20"
                 >
-                  <Github className="w-4 h-4" />
-                  View on GitHub
-                </a>
-              )}
+                  {/* Card Header */}
+                  <div className={`h-2 bg-gradient-to-r ${project.color}`} />
+                  
+                  <div className="p-8 flex-1 flex flex-col">
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="p-3 bg-white/5 rounded-lg text-white group-hover:text-cyber-primary transition-colors border border-white/10">
+                        {project.icon}
+                      </div>
+                      <span className="text-xs font-mono text-gray-500 uppercase tracking-widest border border-white/10 px-2 py-1 rounded">
+                        {project.category}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-2xl font-display font-bold text-white mb-3 tracking-tight">{project.title}</h3>
+                    
+                    <div className="mb-6 space-y-2">
+                      {project.description.map((desc, i) => (
+                        <p key={i} className="text-gray-400 text-sm leading-relaxed">{desc}</p>
+                      ))}
+                    </div>
+
+                    <div className="space-y-2 mb-8 flex-1">
+                      {project.features.map((feature, i) => (
+                        <div key={i} className="flex items-start gap-2 text-sm text-gray-500">
+                          <CheckCircle2 className="w-4 h-4 text-cyber-primary shrink-0 mt-0.5" />
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tech.map((t, i) => (
+                        <span key={i} className="text-xs font-bold text-gray-400 bg-black/50 px-3 py-1.5 rounded-md border border-white/5">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-cyber-primary hover:text-black text-white rounded-lg border border-white/20 hover:border-cyber-primary transition-all font-mono text-sm font-bold w-full justify-center"
+                      >
+                        <Github className="w-4 h-4" />
+                        View on GitHub
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
-        ))}
+          </div>
+        )}
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const Publications = () => (
   <section className="py-24 bg-cyber-black relative overflow-hidden">
@@ -794,9 +925,9 @@ const Contact = () => (
         </p>
 
         <div className="flex flex-col md:flex-row gap-6 justify-center items-center mb-12">
-          <a href="mailto:padalingam7788@gmail.com" className="flex items-center gap-3 px-8 py-4 bg-white/5 rounded-full hover:bg-cyber-primary hover:text-black transition-all border border-white/10 w-full md:w-auto justify-center group">
+          <a href="mailto:padalingam4648@gmail.com" className="flex items-center gap-3 px-8 py-4 bg-white/5 rounded-full hover:bg-cyber-primary hover:text-black transition-all border border-white/10 w-full md:w-auto justify-center group">
             <Mail className="w-5 h-5" />
-            <span className="font-mono text-sm">padalingam7788@gmail.com</span>
+            <span className="font-mono text-sm">padalingam4648@gmail.com</span>
           </a>
         </div>
 
@@ -861,7 +992,6 @@ export default function App() {
       </main>
       <Footer />
       <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
-      <AIChat />
     </div>
   );
 }
