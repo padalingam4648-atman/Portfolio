@@ -34,9 +34,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  
-  // Replace with your actual API Key or load from env
-  final String _apiKey = 'YOUR_API_KEY_HERE';
 
   static final List<Widget> _pages = <Widget>[
     const HomeScreen(),
@@ -48,10 +45,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _pages,
-      ),
+      body: IndexedStack(index: _selectedIndex, children: _pages),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: (int index) {
@@ -60,10 +54,22 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
         destinations: const <NavigationDestination>[
-          NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.local_hospital_outlined), selectedIcon: Icon(Icons.local_hospital), label: 'Doctor'),
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.local_hospital_outlined),
+            selectedIcon: Icon(Icons.local_hospital),
+            label: 'Doctor',
+          ),
           NavigationDestination(icon: Icon(Icons.trending_up), label: 'Market'),
-          NavigationDestination(icon: Icon(Icons.chat_bubble_outline), selectedIcon: Icon(Icons.chat_bubble), label: 'Assistant'),
+          NavigationDestination(
+            icon: Icon(Icons.chat_bubble_outline),
+            selectedIcon: Icon(Icons.chat_bubble),
+            label: 'Assistant',
+          ),
         ],
       ),
     );
@@ -91,31 +97,70 @@ class HomeScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Text('Smart Farming', style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold, color: Colors.green.shade900)),
+                  Text(
+                    'Smart Farming',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green.shade900,
+                    ),
+                  ),
                   const SizedBox(height: 8),
-                  const Text('Your AI companion for better harvests', textAlign: TextAlign.center),
+                  const Text(
+                    'Your AI companion for better harvests',
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: 20),
-            _buildFeatureCard(context, Icons.camera_alt, 'Crop Doctor', 'Identify diseases instantly', Colors.green),
+            _buildFeatureCard(
+              context,
+              Icons.camera_alt,
+              'Crop Doctor',
+              'Identify diseases instantly',
+              Colors.green,
+            ),
             const SizedBox(height: 12),
-            _buildFeatureCard(context, Icons.show_chart, 'Market Insights', 'Check prices & trends', Colors.blue),
+            _buildFeatureCard(
+              context,
+              Icons.show_chart,
+              'Market Insights',
+              'Check prices & trends',
+              Colors.blue,
+            ),
             const SizedBox(height: 12),
-            _buildFeatureCard(context, Icons.smart_toy, 'Assistant', 'Chat with AI expert', Colors.indigo),
+            _buildFeatureCard(
+              context,
+              Icons.smart_toy,
+              'Assistant',
+              'Chat with AI expert',
+              Colors.indigo,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFeatureCard(BuildContext context, IconData icon, String title, String subtitle, Color color) {
+  Widget _buildFeatureCard(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String subtitle,
+    Color color,
+  ) {
     return Card(
       elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), side: BorderSide(color: Colors.grey.shade200)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
       child: ListTile(
         contentPadding: const EdgeInsets.all(16),
-        leading: CircleAvatar(backgroundColor: color.withOpacity(0.1), child: Icon(icon, color: color)),
+        leading: CircleAvatar(
+          backgroundColor: color.withOpacity(0.1),
+          child: Icon(icon, color: color),
+        ),
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(subtitle),
       ),
@@ -139,31 +184,48 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
 
   Future<void> _analyzeImage() async {
     if (_image == null) return;
-    setState(() { _isLoading = true; _result = null; });
+    setState(() {
+      _isLoading = true;
+      _result = null;
+    });
 
     try {
       // NOTE: In a real app, use the API key passed from main or env
-      final model = GenerativeModel(model: 'gemini-2.5-flash', apiKey: 'YOUR_API_KEY');
+      final model = GenerativeModel(
+        model: 'gemini-2.5-flash',
+        apiKey: 'YOUR_API_KEY',
+      );
       final imageBytes = await _image!.readAsBytes();
-      final prompt = TextPart("Analyze this crop image. Identify the plant, diseases, and provide treatment.");
+      final prompt = TextPart(
+        "Analyze this crop image. Identify the plant, diseases, and provide treatment.",
+      );
       final imagePart = DataPart('image/jpeg', imageBytes);
 
       final response = await model.generateContent([
-        Content.multi([prompt, imagePart])
+        Content.multi([prompt, imagePart]),
       ]);
 
-      setState(() { _result = response.text; });
+      setState(() {
+        _result = response.text;
+      });
     } catch (e) {
-      setState(() { _result = "Error analyzing image: $e"; });
+      setState(() {
+        _result = "Error analyzing image: $e";
+      });
     } finally {
-      setState(() { _isLoading = false; });
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
   Future<void> _pickImage(ImageSource source) async {
     final XFile? pickedFile = await _picker.pickImage(source: source);
     if (pickedFile != null) {
-      setState(() { _image = File(pickedFile.path); _result = null; });
+      setState(() {
+        _image = File(pickedFile.path);
+        _result = null;
+      });
     }
   }
 
@@ -176,32 +238,65 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
         children: [
           Container(
             height: 250,
-            decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.grey.shade300)),
-            child: _image != null 
-              ? ClipRRect(borderRadius: BorderRadius.circular(16), child: Image.file(_image!, fit: BoxFit.cover))
-              : Center(child: Icon(Icons.add_a_photo, size: 50, color: Colors.grey.shade400)),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade100,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.grey.shade300),
+            ),
+            child: _image != null
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.file(_image!, fit: BoxFit.cover),
+                  )
+                : Center(
+                    child: Icon(
+                      Icons.add_a_photo,
+                      size: 50,
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
           ),
           const SizedBox(height: 16),
           Row(
             children: [
-              Expanded(child: FilledButton.icon(onPressed: () => _pickImage(ImageSource.camera), icon: const Icon(Icons.camera), label: const Text("Camera"))),
+              Expanded(
+                child: FilledButton.icon(
+                  onPressed: () => _pickImage(ImageSource.camera),
+                  icon: const Icon(Icons.camera),
+                  label: const Text("Camera"),
+                ),
+              ),
               const SizedBox(width: 10),
-              Expanded(child: OutlinedButton.icon(onPressed: () => _pickImage(ImageSource.gallery), icon: const Icon(Icons.photo_library), label: const Text("Gallery"))),
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () => _pickImage(ImageSource.gallery),
+                  icon: const Icon(Icons.photo_library),
+                  label: const Text("Gallery"),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 16),
           if (_image != null)
             FilledButton(
               onPressed: _isLoading ? null : _analyzeImage,
-              style: FilledButton.styleFrom(backgroundColor: Colors.green.shade700, padding: const EdgeInsets.all(16)),
-              child: _isLoading ? const CircularProgressIndicator(color: Colors.white) : const Text("Diagnose Disease"),
+              style: FilledButton.styleFrom(
+                backgroundColor: Colors.green.shade700,
+                padding: const EdgeInsets.all(16),
+              ),
+              child: _isLoading
+                  ? const CircularProgressIndicator(color: Colors.white)
+                  : const Text("Diagnose Disease"),
             ),
           if (_result != null) ...[
             const SizedBox(height: 24),
-            const Text("Diagnosis Result:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            const Text(
+              "Diagnosis Result:",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
             const Divider(),
             MarkdownBody(data: _result!),
-          ]
+          ],
         ],
       ),
     );
@@ -223,20 +318,30 @@ class _MarketScreenState extends State<MarketScreen> {
 
   Future<void> _searchMarket() async {
     if (_controller.text.isEmpty) return;
-    setState(() { _isLoading = true; _result = null; });
+    setState(() {
+      _isLoading = true;
+      _result = null;
+    });
 
     try {
       final model = GenerativeModel(
-        model: 'gemini-2.5-flash', 
+        model: 'gemini-2.0-flash-exp',
         apiKey: 'YOUR_API_KEY',
-        tools: [Tool(googleSearch: GoogleSearch())],
       );
-      final response = await model.generateContent([Content.text(_controller.text)]);
-      setState(() { _result = response.text; });
+      final response = await model.generateContent([
+        Content.text(_controller.text),
+      ]);
+      setState(() {
+        _result = response.text;
+      });
     } catch (e) {
-      setState(() { _result = "Error fetching market data: $e"; });
+      setState(() {
+        _result = "Error fetching market data: $e";
+      });
     } finally {
-      setState(() { _isLoading = false; });
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -252,13 +357,23 @@ class _MarketScreenState extends State<MarketScreen> {
               controller: _controller,
               decoration: InputDecoration(
                 hintText: 'e.g., Wheat prices in Kansas',
-                suffixIcon: IconButton(icon: const Icon(Icons.search), onPressed: _searchMarket),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: _searchMarket,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
             const SizedBox(height: 20),
             if (_isLoading) const CircularProgressIndicator(),
-            if (_result != null) Expanded(child: SingleChildScrollView(child: MarkdownBody(data: _result!))),
+            if (_result != null)
+              Expanded(
+                child: SingleChildScrollView(
+                  child: MarkdownBody(data: _result!),
+                ),
+              ),
           ],
         ),
       ),
@@ -284,7 +399,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     final model = GenerativeModel(
-      model: 'gemini-2.5-flash', 
+      model: 'gemini-2.5-flash',
       apiKey: 'YOUR_API_KEY',
       systemInstruction: Content.text('You are a helpful farming assistant.'),
     );
@@ -294,15 +409,15 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<void> _sendMessage() async {
     if (_controller.text.isEmpty) return;
     final userMsg = _controller.text;
-    setState(() { 
-      _history.add(Content.text(userMsg)); 
-      _isLoading = true; 
+    setState(() {
+      _history.add(Content.text(userMsg));
+      _isLoading = true;
       _controller.clear();
     });
 
     try {
       final response = await _chat.sendMessage(Content.text(userMsg));
-      setState(() { 
+      setState(() {
         if (response.text != null) {
           // Note: In real app, manage local history better for display
         }
@@ -310,7 +425,9 @@ class _ChatScreenState extends State<ChatScreen> {
     } catch (e) {
       // Handle error
     } finally {
-      setState(() { _isLoading = false; });
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -328,12 +445,16 @@ class _ChatScreenState extends State<ChatScreen> {
                 final msg = _chat.history.toList()[index];
                 final isUser = msg.role == 'user';
                 return Align(
-                  alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment: isUser
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                   child: Container(
                     margin: const EdgeInsets.all(8),
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: isUser ? Colors.green.shade100 : Colors.grey.shade200,
+                      color: isUser
+                          ? Colors.green.shade100
+                          : Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(msg.parts.whereType<TextPart>().first.text),
@@ -347,11 +468,21 @@ class _ChatScreenState extends State<ChatScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Expanded(child: TextField(controller: _controller, decoration: const InputDecoration(hintText: 'Ask anything...'))),
-                IconButton(icon: const Icon(Icons.send), onPressed: _sendMessage),
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      hintText: 'Ask anything...',
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.send),
+                  onPressed: _sendMessage,
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
