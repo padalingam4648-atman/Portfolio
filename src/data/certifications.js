@@ -1,0 +1,138 @@
+export const certificationsHeader = {
+  eyebrow: "RESEARCH & PROFESSIONAL DEVELOPMENT",
+  heading: "Research & recognition,",
+  headingItalic: "driven by curiosity.",
+  subtitle: "Research contributions, published work, and continuous learning across AI and software engineering.",
+};
+
+export const researchPublicationsData = {
+  subheading: "RESEARCH PUBLICATIONS",
+  description: "Research contributions exploring intelligent systems, security, and practical technology solutions.",
+  publications: [
+    {
+      id: "pub-01",
+      num: "01",
+      title: "Securing Cloud Storage Using Homomorphic Encryption",
+      journal: "International Journal of Scientific Research in Engineering & Management (IJSREM)",
+      date: "April 2025",
+      volume: "Volume 09, Issue 04",
+      doi: "10.55041/IJSREM43782",
+      doiUrl: "https://doi.org/10.55041/IJSREM43782",
+      tags: [
+        "Homomorphic Encryption",
+        "Cloud Security",
+        "Privacy-Preserving Computing",
+      ],
+      certificateImage: "/certificates/publication-homomorphic-encryption.jpg",
+    },
+    {
+      id: "pub-02",
+      num: "02",
+      title: "Agri And Business Development Platform",
+      journal: "International Journal of Research Publication and Reviews (IJRPR)",
+      date: "26 May 2025",
+      volume: "Volume 6, Issue 5",
+      certificateSerial: "IJRPR 131837-3",
+      tags: [
+        "Agriculture Technology",
+        "Business Development",
+        "Software Platforms",
+      ],
+      certificateImage: "/certificates/publication-agri-business.jpg",
+    },
+    {
+      id: "pub-03",
+      num: "03",
+      title: "MalCure: Smart Malware Response System Using CVE Intelligence",
+      journal: "Journal of Network Security and Data Mining",
+      date: "18 November 2025",
+      volume: "Volume 09, Issue 01, 2026",
+      doi: "10.5281/zenodo.17639101",
+      doiUrl: "https://doi.org/10.5281/zenodo.17639101",
+      tags: [
+        "Cyber Security",
+        "Malware Analysis",
+        "CVE Intelligence",
+      ],
+      certificateImage: "/certificates/publication-malcure.jpg",
+    },
+    {
+      id: "pub-04",
+      num: "04",
+      title: "AI Based Placement Prediction & Career Recommendation System",
+      journal: "International Journal for Research Trends and Innovation (IJRTI)",
+      date: "November 2026",
+      volume: "Volume 11, Issue 11",
+      paperId: "IJRTI2611031",
+      registrationId: "302166",
+      tags: [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Career Recommendation",
+      ],
+      certificateImage: "/certificates/publication-placement-prediction.jpg",
+    },
+  ],
+};
+
+export const courseCertificationsData = {
+  subheading: "COURSES & CERTIFICATIONS",
+  description: "Continuous learning through professional courses and emerging technology programs.",
+  courses: [
+    {
+      id: "course-01",
+      num: "01",
+      title: "Introduction to Prompt Engineering",
+      provider: "Simplilearn SkillUp",
+      date: "23 December 2025",
+      code: "9626061",
+      skills: [
+        "Prompt Engineering",
+        "Generative AI",
+        "LLM Interaction",
+      ],
+      certificateImage: "/certificates/cert-prompt-engineering.jpg",
+    },
+    {
+      id: "course-02",
+      num: "02",
+      title: "Master ChatGPT",
+      provider: "UniAthena",
+      date: "04 August 2025",
+      blockchainId: "2687-1994-0388",
+      skills: [
+        "ChatGPT",
+        "AI Applications",
+        "AI Productivity",
+      ],
+      certificateImage: "/certificates/cert-master-chatgpt.jpg",
+    },
+    {
+      id: "course-03",
+      num: "03",
+      title: "Introduction to Generative AI Concepts",
+      provider: "Microsoft",
+      date: "24 July 2025",
+      skills: [
+        "Generative AI",
+        "AI Fundamentals",
+        "AI Applications",
+      ],
+      certificateImage: "/certificates/cert-generative-ai-concepts.jpg",
+    },
+    {
+      id: "course-04",
+      num: "04",
+      title: "Digital Skills: Artificial Intelligence",
+      provider: "Accenture",
+      platform: "FutureLearn",
+      date: "01 August 2025",
+      skills: [
+        "Artificial Intelligence",
+        "Digital Skills",
+        "AI Applications",
+      ],
+      certificateImage: "/certificates/cert-digital-skills-ai.jpg",
+    },
+  ],
+};

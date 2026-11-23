@@ -1,0 +1,37 @@
+{
+  "Helmet": {
+    "vertCount": 55872,
+    "posByteOffset": 0,
+    "posByteLength": 670464,
+    "normByteOffset": 670464,
+    "normByteLength": 670464
+  },
+  "Chest": {
+    "vertCount": 84474,
+    "posByteOffset": 1340928,
+    "posByteLength": 1013688,
+    "normByteOffset": 2354616,
+    "normByteLength": 1013688
+  },
+  "ShoulderL": {
+    "vertCount": 70569,
+    "posByteOffset": 3368304,
+    "posByteLength": 846828,
+    "normByteOffset": 4215132,
+    "normByteLength": 846828
+  },
+  "ShoulderR": {
+    "vertCount": 70632,
+    "posByteOffset": 5061960,
+    "posByteLength": 847584,
+    "normByteOffset": 5909544,
+    "normByteLength": 847584
+  },
+  "Core": {
+    "vertCount": 30819,
+    "posByteOffset": 6757128,
+    "posByteLength": 369828,
+    "normByteOffset": 7126956,
+    "normByteLength": 369828
+  }
+}
