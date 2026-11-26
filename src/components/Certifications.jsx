@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import {
- FileText,
- Award,
- Calendar,
- ExternalLink,
- Eye,
- X,
- Sparkles,
+  FileText,
+  Award,
+  Calendar,
+  ExternalLink,
+  Eye,
+  X,
 } from 'lucide-react';
 import {
- certificationsHeader,
- researchPublicationsData,
- courseCertificationsData,
+  certificationsHeader,
+  researchPublicationsData,
+  courseCertificationsData,
 } from '../data/certifications';
+import CertificationsCarousel from './CertificationsCarousel';
 
 // ============================================================================
 // CERTIFICATE LIGHTBOX MODAL
@@ -133,266 +133,280 @@ function CertificateModal({ item, isOpen, onClose }) {
 }
 
 // ============================================================================
+// SHARED CREDENTIAL CARD SHELL
+// Renders consistent rounded card styling for both Publications and Courses
+// ============================================================================
+function CredentialCard({
+  icon: Icon,
+  date,
+  eyebrow,
+  title,
+  subtitle,
+  children,
+  tags,
+  certificateImage,
+  certificateUrl,
+  onViewCertificate,
+}) {
+  const hasImage = Boolean(certificateImage);
+  const hasUrl = Boolean(certificateUrl);
+
+  return (
+    <article className="w-full rounded-[2rem] bg-white border border-[#E2E8DC] p-6 sm:p-7 flex flex-col justify-between shadow-sm hover:shadow-md hover:border-[#CBD5C5] transition-all duration-300 group hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+      <div>
+        {/* Card Top Row */}
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <div className="w-11 h-11 rounded-2xl bg-[#EBF7EE] text-[#133E29] flex items-center justify-center shrink-0 group-hover:bg-[#A3E635] group-hover:text-[#0D2B1D] transition-colors motion-reduce:transition-none">
+            <Icon className="w-5 h-5 stroke-[2]" />
+          </div>
+          {date && (
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-[#6A7B6E] text-right">
+              <Calendar className="w-3.5 h-3.5 text-[#10B981] shrink-0" />
+              <span>{date}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Number & Title */}
+        {eyebrow && (
+          <span className="text-[10px] font-bold text-[#10B981] block mb-1 tracking-wider uppercase">
+            {eyebrow}
+          </span>
+        )}
+        <h3 className="font-extrabold text-base text-[#0D2B1D] mb-2 leading-snug group-hover:text-[#10B981] transition-colors motion-reduce:transition-none">
+          {title}
+        </h3>
+
+        {/* Journal or Issuing Organization */}
+        {subtitle && (
+          <p className="text-xs font-bold text-[#133E29] mb-1">
+            {subtitle}
+          </p>
+        )}
+
+        {/* Item-specific metadata */}
+        {children}
+
+        {/* Topic / Skill Tags */}
+        {tags && tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-6">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#F1F4ED] text-[#133E29]"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Action Button: View Certificate (hidden gracefully if no file/link) */}
+      {(hasImage || hasUrl) && (
+        <div className="pt-4 border-t border-[#F1F4ED]">
+          {hasImage ? (
+            <button
+              type="button"
+              onClick={onViewCertificate}
+              className="w-full py-2.5 px-4 rounded-xl bg-[#F8FAF6] hover:bg-[#133E29] hover:text-[#A3E635] text-[#133E29] border border-[#E2E8DC] text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133E29] focus-visible:ring-offset-2 motion-reduce:transition-none"
+            >
+              <Eye className="w-3.5 h-3.5" />
+              <span>View Certificate</span>
+            </button>
+          ) : (
+            <a
+              href={certificateUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-2.5 px-4 rounded-xl bg-[#F8FAF6] hover:bg-[#133E29] hover:text-[#A3E635] text-[#133E29] border border-[#E2E8DC] text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-2xs focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133E29] focus-visible:ring-offset-2 motion-reduce:transition-none"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>View Certificate</span>
+            </a>
+          )}
+        </div>
+      )}
+    </article>
+  );
+}
+
+// ============================================================================
 // MAIN CERTIFICATIONS SECTION
-// Subsection A: 4 Research Publications
-// Subsection B: 4 Professional Course Certifications
+// Subsection A: Research Publications Carousel
+// Subsection B: Courses & Certifications Carousel
 // ============================================================================
 export default function Certifications() {
- const [selectedItem, setSelectedItem] = useState(null);
- const { eyebrow, heading, headingItalic, subtitle } = certificationsHeader;
+  const [selectedItem, setSelectedItem] = useState(null);
+  const { eyebrow, heading, headingItalic, subtitle } = certificationsHeader;
+  const publications = researchPublicationsData.publications || [];
+  const courses = courseCertificationsData.courses || [];
 
- return (
- <section id="certifications" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
- 
- {/* Main Section Header */}
- <div className="mb-14 sm:mb-16">
- <div className="flex items-center gap-2 mb-3">
- <span className="w-2 h-2 rounded-full bg-[#10B981]" />
- <span className="text-xs font-bold tracking-widest text-[#133E29] uppercase">
- {eyebrow}
- </span>
- </div>
+  return (
+    <section
+      id="certifications"
+      className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20 overflow-x-clip"
+    >
+      {/* Main Section Header */}
+      <div className="mb-14 sm:mb-16">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-[#10B981]" />
+          <span className="text-xs font-bold tracking-widest text-[#133E29] uppercase">
+            {eyebrow}
+          </span>
+        </div>
 
- <h2 className="text-3xl sm:text-5xl font-extrabold text-[#0D2B1D] tracking-tight leading-[1.12]">
- {heading}{' '}
- <span className="font-serif-italic font-normal text-[#133E29] text-[1.15em]">
- {headingItalic}
- </span>
- </h2>
+        <h2 className="text-3xl sm:text-5xl font-extrabold text-[#0D2B1D] tracking-tight leading-[1.12]">
+          {heading}{' '}
+          <span className="font-serif-italic font-normal text-[#133E29] text-[1.15em]">
+            {headingItalic}
+          </span>
+        </h2>
 
- {subtitle && (
- <p className="mt-3 text-xs sm:text-sm text-[#5B6D60] max-w-2xl font-normal leading-relaxed">
- {subtitle}
- </p>
- )}
- </div>
+        {subtitle && (
+          <p className="mt-3 text-xs sm:text-sm text-[#5B6D60] max-w-2xl font-normal leading-relaxed">
+            {subtitle}
+          </p>
+        )}
+      </div>
 
- {/* =====================================================================
- SUBSECTION A — RESEARCH PUBLICATIONS (4 Cards)
- ===================================================================== */}
- <div className="mb-16 sm:mb-20">
- 
- {/* Subsection Header */}
- <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8 pb-4 border-b border-[#E2E8DC]">
- <div>
- <span className="text-xs font-bold text-[#10B981] block mb-1 tracking-wider uppercase">
- {researchPublicationsData.subheading}
- </span>
- <p className="text-xs sm:text-sm text-[#5B6D60] font-normal">
- {researchPublicationsData.description}
- </p>
- </div>
- <span className="text-[11px] font-semibold text-[#6A7B6E] shrink-0">
- {researchPublicationsData.publications.length} peer-reviewed publications
- </span>
- </div>
+      {/* =====================================================================
+          SUBSECTION A — RESEARCH PUBLICATIONS CAROUSEL
+      ===================================================================== */}
+      <div className="mb-16 sm:mb-20">
+        <CertificationsCarousel
+          subheading={researchPublicationsData.subheading}
+          description={researchPublicationsData.description}
+          countLabel={`${publications.length} peer-reviewed publications`}
+          prevLabel="Previous publications"
+          nextLabel="Next publications"
+          regionLabel="Research publications"
+          items={publications}
+          renderCard={(pub) => (
+            <CredentialCard
+              icon={FileText}
+              date={pub.date}
+              eyebrow={pub.num ? `PUBLICATION ${pub.num}` : undefined}
+              title={pub.title}
+              subtitle={pub.journal}
+              tags={pub.tags}
+              certificateImage={pub.certificateImage}
+              certificateUrl={pub.certificateUrl}
+              onViewCertificate={() => setSelectedItem(pub)}
+            >
+              {pub.volume && (
+                <p className="text-[11px] font-semibold text-[#6A7B6E] mb-3">
+                  {pub.volume}
+                </p>
+              )}
 
- {/* 4-Card Grid on Desktop */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
- {researchPublicationsData.publications.map((pub) => (
- <div
- key={pub.id}
- className="rounded-[2rem] bg-white border border-[#E2E8DC] p-6 sm:p-7 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300 group hover:-translate-y-1"
- >
- <div>
- {/* Card Top Row */}
- <div className="flex items-center justify-between mb-4">
- <div className="w-11 h-11 rounded-2xl bg-[#EBF7EE] text-[#133E29] flex items-center justify-center shrink-0 group-hover:bg-[#A3E635] group-hover:text-[#0D2B1D] transition-colors">
- <FileText className="w-5 h-5 stroke-[2]" />
- </div>
- <div className="flex items-center gap-1.5 text-xs font-semibold text-[#6A7B6E]">
- <Calendar className="w-3.5 h-3.5 text-[#10B981]" />
- <span>{pub.date}</span>
- </div>
- </div>
+              {pub.doi && (
+                <div className="mb-4">
+                  {pub.doiUrl ? (
+                    <a
+                      href={pub.doiUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-bold text-[#10B981] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133E29] rounded-sm"
+                      title="Open DOI external record"
+                    >
+                      <span className="truncate max-w-[220px]">DOI: {pub.doi}</span>
+                      <ExternalLink className="w-3 h-3 shrink-0" />
+                    </a>
+                  ) : (
+                    <span className="text-[11px] font-semibold text-[#6A7B6E]">
+                      DOI: {pub.doi}
+                    </span>
+                  )}
+                </div>
+              )}
 
- {/* Number & Title */}
- <span className="text-[10px] font-bold text-[#10B981] block mb-1">
- PUBLICATION {pub.num}
- </span>
- <h4 className="font-extrabold text-base text-[#0D2B1D] mb-2 leading-snug group-hover:text-[#10B981] transition-colors">
- {pub.title}
- </h4>
+              {pub.paperId && (
+                <p className="text-[11px] font-semibold text-[#6A7B6E] mb-4">
+                  Paper ID: {pub.paperId}
+                </p>
+              )}
 
- {/* Journal & Metadata */}
- <p className="text-xs font-bold text-[#133E29] mb-1">
- {pub.journal}
- </p>
- <p className="text-[11px] font-semibold text-[#6A7B6E] mb-3">
- {pub.volume}
- </p>
+              {pub.certificateSerial && (
+                <p className="text-[11px] font-semibold text-[#6A7B6E] mb-4">
+                  Serial: {pub.certificateSerial}
+                </p>
+              )}
+            </CredentialCard>
+          )}
+        />
+      </div>
 
- {/* DOI or Paper ID */}
- {pub.doi && (
- <div className="mb-4">
- {pub.doiUrl ? (
- <a
- href={pub.doiUrl}
- target="_blank"
- rel="noopener noreferrer"
- className="inline-flex items-center gap-1 text-[11px] font-bold text-[#10B981] hover:underline"
- title="Open DOI external record"
- >
- <span className="truncate max-w-[200px]">DOI: {pub.doi}</span>
- <ExternalLink className="w-3 h-3 shrink-0" />
- </a>
- ) : (
- <span className="text-[11px] font-semibold text-[#6A7B6E]">
- DOI: {pub.doi}
- </span>
- )}
- </div>
- )}
+      {/* =====================================================================
+          SUBSECTION B — COURSES & CERTIFICATIONS CAROUSEL
+      ===================================================================== */}
+      <div>
+        <CertificationsCarousel
+          subheading={courseCertificationsData.subheading}
+          description={courseCertificationsData.description}
+          countLabel={`${courses.length} verified programs`}
+          prevLabel="Previous certifications"
+          nextLabel="Next certifications"
+          regionLabel="Certifications and courses"
+          items={courses}
+          renderCard={(course) => {
+            const verificationUrl = course.verificationUrl || course.credentialUrl;
 
- {pub.paperId && (
- <p className="text-[11px] font-semibold text-[#6A7B6E] mb-4">
- Paper ID: {pub.paperId}
- </p>
- )}
+            return (
+              <CredentialCard
+                icon={Award}
+                date={course.date}
+                eyebrow={course.num ? `CERTIFICATION ${course.num}` : undefined}
+                title={course.title}
+                subtitle={course.provider}
+                tags={course.skills}
+                certificateImage={course.certificateImage}
+                certificateUrl={course.certificateUrl}
+                onViewCertificate={() => setSelectedItem(course)}
+              >
+                {course.platform && (
+                  <p className="text-[11px] font-semibold text-[#6A7B6E] mb-2">
+                    Platform: {course.platform}
+                  </p>
+                )}
 
- {pub.certificateSerial && (
- <p className="text-[11px] font-semibold text-[#6A7B6E] mb-4">
- Serial: {pub.certificateSerial}
- </p>
- )}
+                {course.code && (
+                  <p className="text-[11px] font-semibold text-[#6A7B6E] mb-4">
+                    Code: {course.code}
+                  </p>
+                )}
 
- {/* Research Tags */}
- <div className="flex flex-wrap gap-1.5 mb-6">
- {pub.tags.map((tag) => (
- <span
- key={tag}
- className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#F1F4ED] text-[#133E29]"
- >
- {tag}
- </span>
- ))}
- </div>
- </div>
+                {course.blockchainId && (
+                  <p className="text-[11px] font-semibold text-[#6A7B6E] mb-4">
+                    Blockchain ID: {course.blockchainId}
+                  </p>
+                )}
 
- {/* Action Button: View Certificate */}
- <div className="pt-4 border-t border-[#F1F4ED]">
- <button
- type="button"
- onClick={() => setSelectedItem(pub)}
- className="w-full py-2.5 px-4 rounded-xl bg-[#F8FAF6] hover:bg-[#133E29] hover:text-[#A3E635] text-[#133E29] border border-[#E2E8DC] text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs group/btn"
- >
- <Eye className="w-3.5 h-3.5" />
- <span>View Certificate</span>
- </button>
- </div>
+                {verificationUrl && (
+                  <div className="mb-4">
+                    <a
+                      href={verificationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-bold text-[#10B981] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#133E29] rounded-sm"
+                    >
+                      <span>Verify Credential</span>
+                      <ExternalLink className="w-3 h-3 shrink-0" />
+                    </a>
+                  </div>
+                )}
+              </CredentialCard>
+            );
+          }}
+        />
+      </div>
 
- </div>
- ))}
- </div>
- </div>
-
- {/* =====================================================================
- SUBSECTION B — COURSES & CERTIFICATIONS (4 Cards)
- ===================================================================== */}
- <div>
- 
- {/* Subsection Header */}
- <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8 pb-4 border-b border-[#E2E8DC]">
- <div>
- <span className="text-xs font-bold text-[#10B981] block mb-1 tracking-wider uppercase">
- {courseCertificationsData.subheading}
- </span>
- <p className="text-xs sm:text-sm text-[#5B6D60] font-normal">
- {courseCertificationsData.description}
- </p>
- </div>
- <span className="text-[11px] font-semibold text-[#6A7B6E] shrink-0">
- {courseCertificationsData.courses.length} verified programs
- </span>
- </div>
-
- {/* 4-Card Grid on Desktop */}
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
- {courseCertificationsData.courses.map((course) => (
- <div
- key={course.id}
- className="rounded-[2rem] bg-white border border-[#E2E8DC] p-6 sm:p-7 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300 group hover:-translate-y-1"
- >
- <div>
- {/* Card Top Row */}
- <div className="flex items-center justify-between mb-4">
- <div className="w-11 h-11 rounded-2xl bg-[#EBF7EE] text-[#133E29] flex items-center justify-center shrink-0 group-hover:bg-[#A3E635] group-hover:text-[#0D2B1D] transition-colors">
- <Award className="w-5 h-5 stroke-[2]" />
- </div>
- <div className="flex items-center gap-1.5 text-xs font-semibold text-[#6A7B6E]">
- <Calendar className="w-3.5 h-3.5 text-[#10B981]" />
- <span>{course.date}</span>
- </div>
- </div>
-
- {/* Number & Title */}
- <span className="text-[10px] font-bold text-[#10B981] block mb-1">
- CERTIFICATION {course.num}
- </span>
- <h4 className="font-extrabold text-base text-[#0D2B1D] mb-2 leading-snug group-hover:text-[#10B981] transition-colors">
- {course.title}
- </h4>
-
- {/* Provider / Platform */}
- <p className="text-xs font-bold text-[#133E29] mb-1">
- {course.provider}
- </p>
- {course.platform && (
- <p className="text-[11px] font-semibold text-[#6A7B6E] mb-2">
- Platform: {course.platform}
- </p>
- )}
-
- {/* Certificate Code or Blockchain ID */}
- {course.code && (
- <p className="text-[11px] font-semibold text-[#6A7B6E] mb-4">
- Code: {course.code}
- </p>
- )}
-
- {course.blockchainId && (
- <p className="text-[11px] font-semibold text-[#6A7B6E] mb-4">
- Blockchain ID: {course.blockchainId}
- </p>
- )}
-
- {/* Skill Tags */}
- <div className="flex flex-wrap gap-1.5 mb-6">
- {course.skills.map((skill) => (
- <span
- key={skill}
- className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#F1F4ED] text-[#133E29]"
- >
- {skill}
- </span>
- ))}
- </div>
- </div>
-
- {/* Action Button: View Certificate */}
- <div className="pt-4 border-t border-[#F1F4ED]">
- <button
- type="button"
- onClick={() => setSelectedItem(course)}
- className="w-full py-2.5 px-4 rounded-xl bg-[#F8FAF6] hover:bg-[#133E29] hover:text-[#A3E635] text-[#133E29] border border-[#E2E8DC] text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs group/btn"
- >
- <Eye className="w-3.5 h-3.5" />
- <span>View Certificate</span>
- </button>
- </div>
-
- </div>
- ))}
- </div>
- </div>
-
- {/* Certificate Image Lightbox Modal */}
- <CertificateModal
- item={selectedItem}
- isOpen={Boolean(selectedItem)}
- onClose={() => setSelectedItem(null)}
- />
-
- </section>
- );
+      {/* Certificate Image Lightbox Modal */}
+      <CertificateModal
+        item={selectedItem}
+        isOpen={Boolean(selectedItem)}
+        onClose={() => setSelectedItem(null)}
+      />
+    </section>
+  );
 }

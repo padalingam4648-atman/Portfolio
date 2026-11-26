@@ -40,14 +40,15 @@ export default function Navbar() {
  </a>
 
  {/* Links */}
- <div className="hidden lg:flex items-center gap-1.5 text-xs font-bold text-[#133E29]">
- <a href="#hero" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Home</a>
- <a href="#about" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">About</a>
- <a href="#projects" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Projects</a>
- <a href="#process" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Process</a>
- <a href="#skills" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Skills</a>
- <a href="#education" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Education</a>
- <a href="#contact" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Contact</a>
+ <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-xs font-bold text-[#133E29]">
+ <a href="#hero" className="px-3 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Home</a>
+ <a href="#about" className="px-3 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">About</a>
+ <a href="#projects" className="px-3 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Projects</a>
+ <a href="#process" className="px-3 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Process</a>
+ <a href="#skills" className="px-3 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Skills</a>
+ <a href="#education" className="px-3 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Education</a>
+ <a href="#media-guild" className="px-3 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Media</a>
+ <a href="#contact" className="px-3 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] tracking-normal">Contact</a>
  </div>
 
  {/* Right Action */}
@@ -82,6 +83,7 @@ export default function Navbar() {
  <a href="#process" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-[#F1F4ED]">Process</a>
  <a href="#skills" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-[#F1F4ED]">Skills</a>
  <a href="#education" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-[#F1F4ED]">Education</a>
+ <a href="#media-guild" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-[#F1F4ED]">Media</a>
  <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-[#F1F4ED]">Contact</a>
  </div>
  </div>

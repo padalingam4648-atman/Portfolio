@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, FileDown, Menu, X, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { personalInfo } from '../data/personalInfo';
 import HolographicArmor from './ui/HolographicArmor';
-import ResumeModal from './ui/ResumeModal';
 
 export default function Hero() {
  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
- const [resumeModalOpen, setResumeModalOpen] = useState(false);
 
  return (
  <section id="hero" className="hero-section">
@@ -37,10 +35,7 @@ export default function Hero() {
  P
  </div>
  <div className="flex flex-col">
- <span 
- className="font-extrabold text-[#0D2B1D] text-xs sm:text-sm leading-none"
- style={{ wordSpacing: '0.22em', letterSpacing: '0.015em' }}
- >
+ <span className="font-extrabold text-[#0D2B1D] text-xs sm:text-sm tracking-normal leading-none">
  PADALINGAM S
  </span>
  <span className="text-[9px] sm:text-[10px] font-semibold text-[#5B6D60] tracking-wider uppercase mt-0.5">
@@ -50,30 +45,32 @@ export default function Hero() {
  </a>
 
  {/* Nav Links (Desktop) */}
- <div className="hidden lg:flex items-center gap-1.5 text-xs font-bold text-[#133E29]">
- <a 
- href="#hero" 
- className="px-3.5 py-1.5 rounded-full bg-[#A3E635] text-[#0D2B1D] font-extrabold shadow-xs transition-colors"
- style={{ wordSpacing: '0.08em' }}
+ <div className="hidden lg:flex items-center lg:gap-0.5 xl:gap-1.5 text-[11px] xl:text-xs font-bold text-[#133E29]">
+ <a
+ href="#hero"
+ className="lg:px-2.5 xl:px-3.5 py-1.5 rounded-full bg-[#A3E635] text-[#0D2B1D] font-extrabold tracking-normal shadow-xs transition-colors"
  >
  Home
  </a>
- <a href="#about" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] transition-colors" style={{ wordSpacing: '0.08em' }}>
+ <a href="#about" className="lg:px-2 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] tracking-normal transition-colors">
  About
  </a>
- <a href="#projects" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] transition-colors" style={{ wordSpacing: '0.08em' }}>
+ <a href="#projects" className="lg:px-2 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] tracking-normal transition-colors">
  Projects
  </a>
- <a href="#process" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] transition-colors" style={{ wordSpacing: '0.08em' }}>
+ <a href="#process" className="lg:px-2 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] tracking-normal transition-colors">
  Process
  </a>
- <a href="#skills" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] transition-colors" style={{ wordSpacing: '0.08em' }}>
+ <a href="#skills" className="lg:px-2 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] tracking-normal transition-colors">
  Skills
  </a>
- <a href="#education" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] transition-colors" style={{ wordSpacing: '0.08em' }}>
+ <a href="#education" className="lg:px-2 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] tracking-normal transition-colors">
  Education
  </a>
- <a href="#contact" className="px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] transition-colors" style={{ wordSpacing: '0.08em' }}>
+ <a href="#media-guild" className="lg:px-2 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] tracking-normal transition-colors">
+ Media
+ </a>
+ <a href="#contact" className="lg:px-2 xl:px-3.5 py-1.5 rounded-full hover:bg-[#F1F4ED] hover:text-[#0D2B1D] tracking-normal transition-colors">
  Contact
  </a>
  </div>
@@ -81,10 +78,7 @@ export default function Hero() {
  {/* Right Action: High-Contrast Status Pill + Get In Touch Button */}
  <div className="flex items-center gap-2.5">
  {/* High-Contrast "Open for AI Roles" Chip */}
- <div 
- className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F4EA] text-[#062413] border border-[#34D399] text-xs font-bold shadow-xs"
- style={{ wordSpacing: '0.12em' }}
- >
+ <div className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E6F4EA] text-[#062413] border border-[#34D399] text-xs font-bold tracking-normal shadow-xs">
  <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
  <span>Open for AI Roles</span>
  </div>
@@ -93,7 +87,7 @@ export default function Hero() {
  href="#contact"
  className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold text-white bg-[#0D2B1D] hover:bg-[#133E29] transition-all transform active:scale-95 shadow-sm"
  >
- <span style={{ wordSpacing: '0.14em', letterSpacing: '0.01em' }}>Get In Touch</span>
+ <span className="tracking-normal">Get In Touch</span>
  <span className="w-5 h-5 rounded-full bg-[#A3E635] flex items-center justify-center text-[#0D2B1D]">
  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
  </span>
@@ -121,6 +115,7 @@ export default function Hero() {
  <a href="#process" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-[#F1F4ED]">Process</a>
  <a href="#skills" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-[#F1F4ED]">Skills</a>
  <a href="#education" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-[#F1F4ED]">Education</a>
+ <a href="#media-guild" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-[#F1F4ED]">Media</a>
  <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="px-3 py-2 rounded-xl hover:bg-[#F1F4ED]">Contact</a>
  </div>
  </div>
@@ -135,12 +130,11 @@ export default function Hero() {
  <div className="lg:col-span-7 flex flex-col items-start justify-center">
  
  {/* High-Contrast Category Pills (Bright mint text on deep forest green with vibrant border) */}
- <div className="flex flex-wrap gap-2 mb-2 sm:mb-2.5">
+ <div className="flex flex-wrap gap-2 mb-3 sm:mb-4">
  {['AI Engineering', 'Generative AI & LLMs', 'Autonomous Agents'].map((pill) => (
  <span
  key={pill}
- className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-[#133E26] text-[#ECFDF5] border border-[#6EE7B7]/50 shadow-xs whitespace-nowrap"
- style={{ wordSpacing: '0.12em', letterSpacing: '0.01em' }}
+ className="px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold tracking-normal bg-[#133E26] text-[#ECFDF5] border border-[#6EE7B7]/50 shadow-xs whitespace-nowrap"
  >
  {pill}
  </span>
@@ -148,70 +142,29 @@ export default function Hero() {
  </div>
 
  {/* Signature Headline with Responsive Clamped Font Scaling */}
- <h1 
- className="hero-headline font-extrabold text-white hero-vertical-gap max-w-2xl"
- style={{ wordSpacing: '0.16em', letterSpacing: '0.012em' }}
- >
+ <h1 className="hero-headline font-extrabold tracking-[-0.01em] text-white hero-vertical-gap max-w-2xl">
  Building intelligent AI solutions,{' '}
- <span className="font-serif-italic font-normal text-[#BEF264] text-[1.12em]">
+ <span className="font-serif-italic font-normal tracking-normal text-[#BEF264] text-[1.12em]">
  built to be useful
  </span>
  </h1>
 
  {/* Subtitle paragraph */}
- <p 
- className="hero-paragraph text-stone-200 font-normal max-w-xl hero-vertical-gap"
- style={{ wordSpacing: '0.08em' }}
- >
+ <p className="hero-paragraph text-stone-200 font-normal tracking-normal max-w-xl hero-vertical-gap">
  {personalInfo.intro}
  </p>
 
- {/* Dual CTAs (Lime Pill Button + Download Resume link) with Relaxed Spacing */}
- <div className="flex flex-wrap items-center gap-3 sm:gap-4 hero-vertical-gap">
- {/* Primary Lime Pill Button */}
+ {/* Primary CTA (Lime Pill Button) */}
+ <div className="flex flex-wrap items-center gap-4 sm:gap-5">
  <a
  href="#projects"
- className="inline-flex items-center gap-3 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full btn-lime text-xs sm:text-sm font-extrabold shadow-xl shadow-[#A3E635]/25 group"
+ className="inline-flex items-center gap-3 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full btn-lime text-xs sm:text-sm font-extrabold tracking-normal shadow-xl shadow-[#A3E635]/25 group"
  >
- <span style={{ wordSpacing: '0.14em', letterSpacing: '0.01em' }}>Explore My Projects</span>
+ <span>Explore My Projects</span>
  <span className="w-6 h-6 rounded-full bg-[#0D2B1D] text-[#A3E635] flex items-center justify-center group-hover:rotate-45 transition-transform">
  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
  </span>
  </a>
-
- {/* Secondary action: Resume Modal Trigger */}
- <button
- type="button"
- onClick={() => setResumeModalOpen(true)}
- className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white hover:text-[#A3E635] transition-colors py-1.5 px-1 border-b border-white/40 hover:border-[#A3E635] focus:outline-none focus:ring-2 focus:ring-[#A3E635] focus:ring-offset-2 focus:ring-offset-[#0D2B1D] rounded-sm group cursor-pointer"
- aria-label="View Resume Preview"
- >
- <FileDown className="w-4 h-4 mr-1 text-[#A3E635] group-hover:scale-110 transition-transform" />
- <span style={{ wordSpacing: '0.14em', letterSpacing: '0.01em' }}>Resume</span>
- <ArrowUpRight className="w-3.5 h-3.5" />
- </button>
- </div>
-
- {/* Grounded, Honest Highlight Checkmarks */}
- <div className="mt-1 sm:mt-2 lg:mt-2 flex flex-wrap items-center gap-4 text-xs font-medium text-stone-300">
- <div className="flex items-center gap-2">
- <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#A3E635] shrink-0" />
- <span className="font-semibold text-stone-200 text-[11px] sm:text-xs" style={{ wordSpacing: '0.12em' }}>
- RAG &amp; Agent Projects
- </span>
- </div>
- <div className="flex items-center gap-2">
- <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#A3E635] shrink-0" />
- <span className="font-semibold text-stone-200 text-[11px] sm:text-xs" style={{ wordSpacing: '0.12em' }}>
- Python + FastAPI
- </span>
- </div>
- <div className="flex items-center gap-2">
- <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#A3E635] shrink-0" />
- <span className="font-semibold text-stone-200 text-[11px] sm:text-xs" style={{ wordSpacing: '0.12em' }}>
- Final-Year Student
- </span>
- </div>
  </div>
 
  </div>
@@ -230,9 +183,6 @@ export default function Hero() {
  </div>
 
  </div>
-
- {/* Resume Lightbox Modal */}
- <ResumeModal isOpen={resumeModalOpen} onClose={() => setResumeModalOpen(false)} />
  </section>
  );
 }

@@ -8,6 +8,7 @@ import ProcessBento from './components/ProcessBento';
 import Skills from './components/Skills';
 import Education from './components/Education';
 import Certifications from './components/Certifications';
+import MediaGuild from './components/MediaGuild';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -24,6 +25,7 @@ export default function App() {
         <Skills />
         <Education />
         <Certifications />
+        <MediaGuild />
         <Contact />
       </main>
       <Footer />
